@@ -120,6 +120,8 @@ match_players$Opposit_Team = ifelse(match_players$Opposit_Team=="Delhi Daredevil
 #Winner
 Match$match_winner = ifelse(Match$match_winner=="Delhi Daredevils", 1, ifelse(Match$match_winner=="Chennai Super Kings", 3, ifelse(Match$match_winner=="Deccan Chargers", 8, ifelse(Match$match_winner=="Gujarat Lions", 13, ifelse(Match$match_winner=="Kings XI Punjab", 4,ifelse(Match$match_winner=="Kochi Tuskers Kerala",9,ifelse(Match$match_winner=="Kolkata Knight Riders", 1,ifelse(Match$match_winner=="Mumbai Indians",7,ifelse(Match$match_winner=="Pune Warriors",10,ifelse(Match$match_winner=="Rajasthan Royals",5,ifelse(Match$match_winner=="Rising Pune Supergiants",12,ifelse(Match$match_winner=="Royal Challengers Bangalore",2,ifelse(Match$match_winner=="Sunrisers Hyderabad ",11, 0)))))))))))))
 
+#TossWin
+Match$Toss_Winner = ifelse(Match$Toss_Winner=="Delhi Daredevils", 1, ifelse(Match$Toss_Winner=="Chennai Super Kings", 3, ifelse(Match$Toss_Winner=="Deccan Chargers", 8, ifelse(Match$Toss_Winner=="Gujarat Lions", 13, ifelse(Match$Toss_Winner=="Kings XI Punjab", 4,ifelse(Match$Toss_Winner=="Kochi Tuskers Kerala",9,ifelse(Match$Toss_Winner=="Kolkata Knight Riders", 1,ifelse(Match$Toss_Winner=="Mumbai Indians",7,ifelse(Match$Toss_Winner=="Pune Warriors",10,ifelse(Match$Toss_Winner=="Rajasthan Royals",5,ifelse(Match$Toss_Winner=="Rising Pune Supergiants",12,ifelse(Match$Toss_Winner=="Royal Challengers Bangalore",2,ifelse(Match$Toss_Winner=="Sunrisers Hyderabad ",11, 0)))))))))))))
 
 #Opposit_captain
 Players$Captain_Id = Players$Player_Id
@@ -225,8 +227,9 @@ df1 = df1 %>% mutate(`Avg_Impact_Bowling` = (df1$`Impact Bowling`)/11)
 df2 = df2 %>% mutate(`Avg_Impact_Fielding` = (df2$`Impact Fielding`)/11)
 
 df = merge(df,Match,by="match_id")
-df = df[,c(-5,-6,-7,-8,-9,-10,-11,-12,-13,-15,-16,-17,-18,-19,-20)]
+df = df[,c(-5,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
 
+df = df %>% mutate(`TossWin` = ifelse(df$Team_Id == df$Toss_Winner,1,0))
 df = df %>% mutate(`Win` = ifelse(df$Team_Id == df$match_winner,1,0))
 
 df = df %>%

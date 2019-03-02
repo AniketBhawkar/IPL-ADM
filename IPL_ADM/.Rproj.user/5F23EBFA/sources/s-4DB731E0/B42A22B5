@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1551555624719.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "448192824",
+    "id" : "B42A22B5",
+    "lastKnownWriteTime" : 1551557940,
+    "last_content_update" : 1551557940906,
+    "path" : "F:/Masters/Semester 2/Advanced Data Mining/IPL/IPL_ADM/Regression/CoinToss.R",
+    "project_path" : "Regression/CoinToss.R",
+    "properties" : {
+        "cursorPosition" : "72,31",
+        "scrollLine" : "44",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
