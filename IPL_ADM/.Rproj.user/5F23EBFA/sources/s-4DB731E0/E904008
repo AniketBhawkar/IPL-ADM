@@ -12,10 +12,10 @@
     "path" : "F:/Masters/Semester 2/Advanced Data Mining/IPL/IPL_ADM/ball_by_ball.R",
     "project_path" : "ball_by_ball.R",
     "properties" : {
-        "cursorPosition" : "38,0",
+        "cursorPosition" : "2,0",
         "scrollLine" : "0"
     },
-    "relative_order" : 5,
+    "relative_order" : 2,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"

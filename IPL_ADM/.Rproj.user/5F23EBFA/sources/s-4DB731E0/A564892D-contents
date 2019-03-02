@@ -26,4 +26,4 @@ match= match %>%
 match <- match[,-14]
 
 #remove country ID
-match <- match[,-15] 
+match <- match[,-15]  

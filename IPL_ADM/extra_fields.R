@@ -2,6 +2,11 @@
 ball_by_ball = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Ball_By_Ball_New.csv")
 match_players = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Player_match.csv")
 Players <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Player.csv")
+Match <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Match.csv")
+Teams <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Team.csv")
+Teams = Teams[,c(-1)]
+
+
 # Runs scored by player
 #Batting score
 df = setNames(aggregate(ball_by_ball$Runs_Scored,by=list(ball_by_ball$Striker,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Runs Scored"))
@@ -102,14 +107,18 @@ match_players$economy <- round(match_players$economy,digits=2)
 
 #No_of_overs roundoff
 match_players$No_of_overs <- round(match_players$No_of_overs,digits=2)
+
 #Player_team
-match_players$Player_team = as.numeric(match_players$Player_team)
-match_players$Player_team[is.na(match_players$Player_team)] = 0
+# match_players$Player_team = as.numeric(match_players$Player_team)
+# match_players$Player_team[is.na(match_players$Player_team)] = 0
 match_players$Player_team = ifelse(match_players$Player_team=="Delhi Daredevils", 1, ifelse(match_players$Player_team=="Chennai Super Kings", 3, ifelse(match_players$Player_team=="Deccan Chargers", 8, ifelse(match_players$Player_team=="Gujarat Lions", 13, ifelse(match_players$Player_team=="Kings XI Punjab", 4,ifelse(match_players$Player_team=="Kochi Tuskers Kerala",9,ifelse(match_players$Player_team=="Kolkata Knight Riders", 1,ifelse(match_players$Player_team=="Mumbai Indians",7,ifelse(match_players$Player_team=="Pune Warriors",10,ifelse(match_players$Player_team=="Rajasthan Royals",5,ifelse(match_players$Player_team=="Rising Pune Supergiants",12,ifelse(match_players$Player_team=="Royal Challengers Bangalore",2,ifelse(match_players$Player_team=="Sunrisers Hyderabad ",11, 0)))))))))))))
 #Opposit_Team
-match_players$Opposit_Team = as.numeric(match_players$Opposit_Team)
-match_players$Opposit_Team[is.na(match_players$Opposit_Team)] = 0
+# match_players$Opposit_Team = as.numeric(match_players$Opposit_Team)
+# match_players$Opposit_Team[is.na(match_players$Opposit_Team)] = 0
 match_players$Opposit_Team = ifelse(match_players$Opposit_Team=="Delhi Daredevils", 1, ifelse(match_players$Opposit_Team=="Chennai Super Kings", 3, ifelse(match_players$Opposit_Team=="Deccan Chargers", 8, ifelse(match_players$Opposit_Team=="Gujarat Lions", 13, ifelse(match_players$Opposit_Team=="Kings XI Punjab", 4,ifelse(match_players$Opposit_Team=="Kochi Tuskers Kerala",9,ifelse(match_players$Opposit_Team=="Kolkata Knight Riders", 1,ifelse(match_players$Opposit_Team=="Mumbai Indians",7,ifelse(match_players$Opposit_Team=="Pune Warriors",10,ifelse(match_players$Opposit_Team=="Rajasthan Royals",5,ifelse(match_players$Opposit_Team=="Rising Pune Supergiants",12,ifelse(match_players$Opposit_Team=="Royal Challengers Bangalore",2,ifelse(match_players$Opposit_Team=="Sunrisers Hyderabad ",11, 0)))))))))))))
+
+#Winner
+Match$match_winner = ifelse(Match$match_winner=="Delhi Daredevils", 1, ifelse(Match$match_winner=="Chennai Super Kings", 3, ifelse(Match$match_winner=="Deccan Chargers", 8, ifelse(Match$match_winner=="Gujarat Lions", 13, ifelse(Match$match_winner=="Kings XI Punjab", 4,ifelse(Match$match_winner=="Kochi Tuskers Kerala",9,ifelse(Match$match_winner=="Kolkata Knight Riders", 1,ifelse(Match$match_winner=="Mumbai Indians",7,ifelse(Match$match_winner=="Pune Warriors",10,ifelse(Match$match_winner=="Rajasthan Royals",5,ifelse(Match$match_winner=="Rising Pune Supergiants",12,ifelse(Match$match_winner=="Royal Challengers Bangalore",2,ifelse(Match$match_winner=="Sunrisers Hyderabad ",11, 0)))))))))))))
 
 
 #Opposit_captain
@@ -149,15 +158,16 @@ match_players = match_players[,c(-1,-5,-2,-6,-7,-8,-17,-18)]
 
 
 impact_factor <- function(match_players){
-  match_players = match_players %>% mutate(`im1` = ifelse(match_players$Strike_rate>=180,10,ifelse(match_players$Strike_rate>=160,9,ifelse(match_players$Strike_rate>=140,8,ifelse(match_players$Strike_rate>=120,7,ifelse(match_players$Strike_rate>=100,6,ifelse(match_players$Strike_rate>=80,5,4)))))))
-  match_players = match_players %>% mutate(`im2` = ifelse(match_players$Fours>=7,10,ifelse(match_players$Fours>=5,9,ifelse(match_players$Fours>=4,8,ifelse(match_players$Fours>=2,7,ifelse(match_players$Fours>0,6,5))))))
-  match_players = match_players %>% mutate(`im3` = ifelse(match_players$Sixes>=4,10,ifelse(match_players$Sixes>=3,9,ifelse(match_players$Sixes>=2,7,ifelse(match_players$Sixes>=1,6,5)))))  
-  match_players = match_players %>% mutate(`im4` = ifelse(match_players$`Dot balls Batsmen`>=20,6,ifelse(match_players$`Dot balls Batsmen`>=15,7,ifelse(match_players$`Dot balls Batsmen`>=10,8,ifelse(match_players$`Dot balls Batsmen`>=5,9,10)))))
-  match_players = match_players %>% mutate(`im5` = ifelse(match_players$Runs.Scored>=50,10,ifelse(match_players$Runs.Scored>=30,9,ifelse(match_players$Runs.Scored>=20,8,ifelse(match_players$Runs.Scored>=15,7,ifelse(match_players$Runs.Scored>=10,6,5))))))  
-  match_players = match_players %>% mutate(`impact_batting` = (match_players$im1+match_players$im2+match_players$im3+match_players$im4+match_players$im5)/5)  
-
+  match_players = match_players %>% mutate(`im1` = ifelse(match_players$Strike_rate>=170,10,ifelse(match_players$Strike_rate>=150,9,ifelse(match_players$Strike_rate>=140,8,ifelse(match_players$Strike_rate>=120,7,ifelse(match_players$Strike_rate>=100,6,ifelse(match_players$Strike_rate>=80,3,2)))))))
+  match_players = match_players %>% mutate(`im2` = ifelse(match_players$Fours>=6,10,ifelse(match_players$Fours>=4,9,ifelse(match_players$Fours>=3,8,ifelse(match_players$Fours>=2,7,ifelse(match_players$Fours>0,6,3))))))
+  match_players = match_players %>% mutate(`im3` = ifelse(match_players$Sixes>=4,10,ifelse(match_players$Sixes>=3,9,ifelse(match_players$Sixes>=2,7,ifelse(match_players$Sixes>=1,6,4)))))  
+  # match_players = match_players %>% mutate(`im4` = ifelse(match_players$`Dot balls Batsmen`>=20,6,ifelse(match_players$`Dot balls Batsmen`>=15,7,ifelse(match_players$`Dot balls Batsmen`>=10,8,ifelse(match_players$`Dot balls Batsmen`>=5,9,10)))))
+  match_players = match_players %>% mutate(`im5` = ifelse(match_players$Runs.Scored>=35,10,ifelse(match_players$Runs.Scored>=25,9,ifelse(match_players$Runs.Scored>=20,8,ifelse(match_players$Runs.Scored>=15,7,ifelse(match_players$Runs.Scored>=10,6,3))))))  
+  # match_players = match_players %>% mutate(`impact_batting` = (match_players$im1+match_players$im2+match_players$im3+match_players$im4+match_players$im5)/5)  
+  match_players = match_players %>% mutate(`impact_batting` = (match_players$im1+match_players$im2+match_players$im3+match_players$im5)/4)  
+  
   match_players = match_players %>% mutate(`im16` = ifelse(match_players$economy>10,5,ifelse(match_players$economy>9,6,ifelse(match_players$economy>8,7,ifelse(match_players$economy>7,8,ifelse(match_players$economy>6,9,10))))))
-  match_players = match_players %>% mutate(`im11` = ifelse(match_players$`Dot balls Bowler`<=5,5,ifelse(match_players$`Dot balls Bowler`<=6,6,ifelse(match_players$`Dot balls Bowler`<=8,7,ifelse(match_players$`Dot balls Bowler`<=12,8,ifelse(match_players$`Dot balls Bowler`<=15,9,10))))))
+  match_players = match_players %>% mutate(`im11` = ifelse(match_players$`Dot balls Bowler`==0,0,ifelse(match_players$`Dot balls Bowler`<=5,5,ifelse(match_players$`Dot balls Bowler`<=6,6,ifelse(match_players$`Dot balls Bowler`<=8,7,ifelse(match_players$`Dot balls Bowler`<=12,8,ifelse(match_players$`Dot balls Bowler`<=15,9,10)))))))
   match_players = match_players %>% mutate(`im12` = ifelse(match_players$Wickets==0,5,ifelse(match_players$Wickets==1,7,ifelse(match_players$Wickets==2,8,ifelse(match_players$Wickets==3,9,10)))))
   match_players = match_players %>% mutate(`impact_bowling` = (match_players$im16+match_players$im11+match_players$im12)/3)  
   match_players$impact_bowling = round(match_players$impact_bowling,2)
@@ -205,4 +215,23 @@ impact_factor_player$Average_Impact_Fielding <- round(impact_factor_player$Avera
 rm(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16,df17,df18,df19,df20,df21)
 
 
+df = setNames(aggregate(match_players$impact_batting,by=list(match_players$Player_team,match_players$Match_Id),sum),c("Team_Id","match_id","Impact Batting"))
+df1 = setNames(aggregate(match_players$impact_bowling,by=list(match_players$Player_team,match_players$Match_Id),sum),c("Team_Id","match_id","Impact Bowling"))
+df2 = setNames(aggregate(match_players$impact_fielding,by=list(match_players$Player_team,match_players$Match_Id),sum),c("Team_Id","match_id","Impact Fielding"))
+
+
+df = df %>% mutate(`Avg_Impact_Batting` = (df$`Impact Batting`)/11)
+df1 = df1 %>% mutate(`Avg_Impact_Bowling` = (df1$`Impact Bowling`)/11)
+df2 = df2 %>% mutate(`Avg_Impact_Fielding` = (df2$`Impact Fielding`)/11)
+
+df = merge(df,Match,by="match_id")
+df = df[,c(-5,-6,-7,-8,-9,-10,-11,-12,-13,-15,-16,-17,-18,-19,-20)]
+
+df = df %>% mutate(`Win` = ifelse(df$Team_Id == df$match_winner,1,0))
+
+df = df %>%
+  left_join(df1, by=c("Team_Id","match_id")) %>% 
+  left_join(df2, by=c("Team_Id","match_id"))
+
+write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
 write.csv(match_players, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)
