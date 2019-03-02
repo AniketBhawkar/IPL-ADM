@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1549810342596.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D8409468",
+    "lastKnownWriteTime" : 1549818961,
+    "last_content_update" : 1549818961851,
+    "path" : "D:/SEM 2/ADM/project/IPL/IPL_ADM/ball_by_ball.R",
+    "project_path" : "ball_by_ball.R",
+    "properties" : {
+        "cursorPosition" : "7,38",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

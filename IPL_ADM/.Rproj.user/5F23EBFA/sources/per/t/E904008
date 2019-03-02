@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1551534420317.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3750111995",
+    "id" : "E904008",
+    "lastKnownWriteTime" : 1551534583,
+    "last_content_update" : 1551534583803,
+    "path" : "F:/Masters/Semester 2/Advanced Data Mining/IPL/IPL_ADM/ball_by_ball.R",
+    "project_path" : "ball_by_ball.R",
+    "properties" : {
+        "cursorPosition" : "38,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

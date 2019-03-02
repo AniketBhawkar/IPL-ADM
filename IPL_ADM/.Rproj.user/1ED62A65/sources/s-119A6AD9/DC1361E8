@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1549815701087.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DC1361E8",
+    "lastKnownWriteTime" : 1549832779,
+    "last_content_update" : 1549832779714,
+    "path" : "D:/SEM 2/ADM/project/IPL/IPL_ADM/extra_fields.R",
+    "project_path" : "extra_fields.R",
+    "properties" : {
+        "cursorPosition" : "47,40",
+        "scrollLine" : "28",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

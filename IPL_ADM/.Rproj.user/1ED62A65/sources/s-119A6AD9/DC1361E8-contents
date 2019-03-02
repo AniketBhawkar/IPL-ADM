@@ -1,0 +1,57 @@
+# Load Ball by Ball
+ball_by_ball = read.csv("D:/SEM 2/ADM/project/IPL/raghu543-ipl-data-till-2017/clean datasets/Ball_By_Ball_New.csv")
+match_players = read.csv("D:/SEM 2/ADM/project/IPL/raghu543-ipl-data-till-2017/Player_match.csv")
+# Runs scored by player
+#Batting score
+df = setNames(aggregate(ball_by_ball$Runs_Scored,by=list(ball_by_ball$Striker,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Runs Scored"))
+df2 = setNames(aggregate(ball_by_ball$validBall,by=list(ball_by_ball$Striker,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Balls Faced"))
+#Strike rate
+df3 <- data.frame(df,df2$`Balls Faced`)
+df3 <- df3 %>% mutate(Strike_rate = Runs.Scored/df2..Balls.Faced.*100)
+df3$Strike_rate <- round(df3$Strike_rate,digits = 2)
+
+#Bowling
+df4 = setNames(aggregate(ball_by_ball$Runs_Scored,by=list(ball_by_ball$Bowler,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Runs Conceded"))
+df11 = setNames(aggregate(ball_by_ball$validBall,by=list(ball_by_ball$Bowler,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Balls Bowled"))
+df5 <- setNames(aggregate(ball_by_ball$Bowler_Wicket,by=list(ball_by_ball$Bowler,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Wickets")) 
+
+# Run Out
+df6 <- setNames(aggregate(ball_by_ball$Run_out,by=list(ball_by_ball$Fielders,ball_by_ball$MatcH_id),length),c("Player_Id","Match_Id","Run Out")) 
+
+# Catches
+df7 <- setNames(aggregate(ball_by_ball$caught_and_bowled,by=list(ball_by_ball$Fielders,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Catches1")) 
+df8 <- setNames(aggregate(ball_by_ball$Caught,by=list(ball_by_ball$Fielders,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Catches2")) 
+df9 <- setNames(aggregate(ball_by_ball$Keeper_Catch,by=list(ball_by_ball$Fielders,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Catches3")) 
+
+# Stumping
+df10 <- setNames(aggregate(ball_by_ball$Stumped,by=list(ball_by_ball$Fielders,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Stumping")) 
+
+# Merge Columns
+match_players = match_players %>%
+  left_join(df3, by=c("Player_Id","Match_Id")) %>% 
+  left_join(df4, by=c("Player_Id","Match_Id")) %>%
+  left_join(df11, by=c("Player_Id","Match_Id")) %>%   
+  left_join(df5, by=c("Player_Id","Match_Id")) %>%
+  left_join(df6, by=c("Player_Id","Match_Id")) %>% 
+  left_join(df7, by=c("Player_Id","Match_Id")) %>%
+  left_join(df8, by=c("Player_Id","Match_Id")) %>%
+  left_join(df9, by=c("Player_Id","Match_Id")) %>% 
+  left_join(df10, by=c("Player_Id","Match_Id"))
+
+match_players = match_players %>% mutate(Catches = Catches1+Catches2+Catches3)
+# Remove Extra Catches Columns
+match_players = match_players[ , -which(names(match_players) %in% c("Catches1","Catches2","Catches3"))]
+
+#Remove NA
+match_players$Runs.Scored[is.na(match_players$Runs.Scored)] = 0
+match_players$df2..Balls.Faced.[is.na(match_players$df2..Balls.Faced.)] = 0
+match_players$Strike_rate[is.na(match_players$Strike_rate)] = 0
+match_players$`Runs Conceded`[is.na(match_players$`Runs Conceded`)] = 0
+match_players$Wickets[is.na(match_players$Wickets)] = 0
+match_players$`Run Out`[is.na(match_players$`Run Out`)] = 0
+match_players$Stumping[is.na(match_players$Stumping)] = 0
+match_players$Catches[is.na(match_players$Catches)] = 0
+match_players$`Balls Bowled`[is.na(match_players$`Balls Bowled`)] = 0
+match_players <- match_players[-1,]
+
+write.csv(match_players, "D:/SEM 2/ADM/project/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)

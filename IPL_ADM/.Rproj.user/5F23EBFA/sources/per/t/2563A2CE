@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1551534445733.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1298508139",
+    "id" : "2563A2CE",
+    "lastKnownWriteTime" : 1551536988,
+    "last_content_update" : 1551536988778,
+    "path" : "F:/Masters/Semester 2/Advanced Data Mining/IPL/IPL_ADM/extra_fields.R",
+    "project_path" : "extra_fields.R",
+    "properties" : {
+        "cursorPosition" : "207,152",
+        "scrollLine" : "150"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

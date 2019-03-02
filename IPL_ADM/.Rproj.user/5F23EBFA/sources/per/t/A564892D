@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1551534451453.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2106428751",
+    "id" : "A564892D",
+    "lastKnownWriteTime" : 1551191297,
+    "last_content_update" : 1551191297,
+    "path" : "F:/Masters/Semester 2/Advanced Data Mining/IPL/IPL_ADM/match.R",
+    "project_path" : "match.R",
+    "properties" : {
+        "cursorPosition" : "28,20",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
