@@ -1,3 +1,4 @@
+library(dplyr)
 # Load Ball by Ball
 ball_by_ball = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Ball_By_Ball_New.csv")
 match_players = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Player_match.csv")
@@ -232,9 +233,32 @@ df = df[,c(-5,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
 df = df %>% mutate(`TossWin` = ifelse(df$Team_Id == df$Toss_Winner,1,0))
 df = df %>% mutate(`Win` = ifelse(df$Team_Id == df$match_winner,1,0))
 
+
 df = df %>%
   left_join(df1, by=c("Team_Id","match_id")) %>% 
   left_join(df2, by=c("Team_Id","match_id"))
 
+# over by over score
+a = ball_by_ball
+b <- a %>%
+  group_by(MatcH_id, Over_id) %>%
+  summarise(a = sum(Runs_Scored),b = distinct(Team_Batting))
+
+df = setNames(aggregate(a$Runs_Scored,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Runs Scored"))
+df1 = setNames(aggregate(a$Extra_runs,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Extras"))
+
+df = df %>%
+  left_join(df1, by=c("Match_Id", "Innings","Team","Over"))
+
+df$Overall <- df$`Runs Scored`+df$Extras
+df2 = setNames(aggregate(df$Overall,by=list(df$Match_Id,df$Innings,df$Team),sum),c("Match_Id", "Innings","Team","Score"))
+
+df3 = df %>%
+  group_by(Match_Id,Innings)%>%
+  mutate(x = cumsum(Overall))
+
+write.csv(df3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Over_by_Over.csv",row.names = FALSE)
 write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
 write.csv(match_players, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)
+
+rm(df,df1,df2,df3,a)
