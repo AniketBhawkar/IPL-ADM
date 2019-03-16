@@ -112,17 +112,17 @@ match_players$No_of_overs <- round(match_players$No_of_overs,digits=2)
 #Player_team
 # match_players$Player_team = as.numeric(match_players$Player_team)
 # match_players$Player_team[is.na(match_players$Player_team)] = 0
-match_players$Player_team = ifelse(match_players$Player_team=="Delhi Daredevils", 1, ifelse(match_players$Player_team=="Chennai Super Kings", 3, ifelse(match_players$Player_team=="Deccan Chargers", 8, ifelse(match_players$Player_team=="Gujarat Lions", 13, ifelse(match_players$Player_team=="Kings XI Punjab", 4,ifelse(match_players$Player_team=="Kochi Tuskers Kerala",9,ifelse(match_players$Player_team=="Kolkata Knight Riders", 1,ifelse(match_players$Player_team=="Mumbai Indians",7,ifelse(match_players$Player_team=="Pune Warriors",10,ifelse(match_players$Player_team=="Rajasthan Royals",5,ifelse(match_players$Player_team=="Rising Pune Supergiants",12,ifelse(match_players$Player_team=="Royal Challengers Bangalore",2,ifelse(match_players$Player_team=="Sunrisers Hyderabad ",11, 0)))))))))))))
+match_players$Player_team = ifelse(match_players$Player_team=="Delhi Daredevils", 6, ifelse(match_players$Player_team=="Chennai Super Kings", 3, ifelse(match_players$Player_team=="Deccan Chargers", 8, ifelse(match_players$Player_team=="Gujarat Lions", 13, ifelse(match_players$Player_team=="Kings XI Punjab" | match_players$Player_team=="kings XI Punjab", 4,ifelse(match_players$Player_team=="Kochi Tuskers Kerala",9,ifelse(match_players$Player_team=="Kolkata Knight Riders", 1,ifelse(match_players$Player_team=="Mumbai Indians",7,ifelse(match_players$Player_team=="Pune Warriors",10,ifelse(match_players$Player_team=="Rajasthan Royals",5,ifelse(match_players$Player_team=="Rising Pune Supergiants",12,ifelse(match_players$Player_team=="Royal Challengers Bangalore",2,ifelse(match_players$Player_team=="Sunrisers Hyderabad" | match_players$Player_team=="sunrisers Hyderabad",11, 0)))))))))))))
 #Opposit_Team
 # match_players$Opposit_Team = as.numeric(match_players$Opposit_Team)
 # match_players$Opposit_Team[is.na(match_players$Opposit_Team)] = 0
-match_players$Opposit_Team = ifelse(match_players$Opposit_Team=="Delhi Daredevils", 1, ifelse(match_players$Opposit_Team=="Chennai Super Kings", 3, ifelse(match_players$Opposit_Team=="Deccan Chargers", 8, ifelse(match_players$Opposit_Team=="Gujarat Lions", 13, ifelse(match_players$Opposit_Team=="Kings XI Punjab", 4,ifelse(match_players$Opposit_Team=="Kochi Tuskers Kerala",9,ifelse(match_players$Opposit_Team=="Kolkata Knight Riders", 1,ifelse(match_players$Opposit_Team=="Mumbai Indians",7,ifelse(match_players$Opposit_Team=="Pune Warriors",10,ifelse(match_players$Opposit_Team=="Rajasthan Royals",5,ifelse(match_players$Opposit_Team=="Rising Pune Supergiants",12,ifelse(match_players$Opposit_Team=="Royal Challengers Bangalore",2,ifelse(match_players$Opposit_Team=="Sunrisers Hyderabad ",11, 0)))))))))))))
+match_players$Opposit_Team = ifelse(match_players$Opposit_Team=="Delhi Daredevils", 6, ifelse(match_players$Opposit_Team=="Chennai Super Kings", 3, ifelse(match_players$Opposit_Team=="Deccan Chargers", 8, ifelse(match_players$Opposit_Team=="Gujarat Lions", 13, ifelse(match_players$Opposit_Team=="Kings XI Punjab" | match_players$Player_team=="kings XI Punjab", 4,ifelse(match_players$Opposit_Team=="Kochi Tuskers Kerala",9,ifelse(match_players$Opposit_Team=="Kolkata Knight Riders", 1,ifelse(match_players$Opposit_Team=="Mumbai Indians",7,ifelse(match_players$Opposit_Team=="Pune Warriors",10,ifelse(match_players$Opposit_Team=="Rajasthan Royals",5,ifelse(match_players$Opposit_Team=="Rising Pune Supergiants",12,ifelse(match_players$Opposit_Team=="Royal Challengers Bangalore",2,ifelse(match_players$Opposit_Team=="Sunrisers Hyderabad" | match_players$Player_team=="sunrisers Hyderabad",11, 0)))))))))))))
 
 #Winner
-Match$match_winner = ifelse(Match$match_winner=="Delhi Daredevils", 1, ifelse(Match$match_winner=="Chennai Super Kings", 3, ifelse(Match$match_winner=="Deccan Chargers", 8, ifelse(Match$match_winner=="Gujarat Lions", 13, ifelse(Match$match_winner=="Kings XI Punjab", 4,ifelse(Match$match_winner=="Kochi Tuskers Kerala",9,ifelse(Match$match_winner=="Kolkata Knight Riders", 1,ifelse(Match$match_winner=="Mumbai Indians",7,ifelse(Match$match_winner=="Pune Warriors",10,ifelse(Match$match_winner=="Rajasthan Royals",5,ifelse(Match$match_winner=="Rising Pune Supergiants",12,ifelse(Match$match_winner=="Royal Challengers Bangalore",2,ifelse(Match$match_winner=="Sunrisers Hyderabad ",11, 0)))))))))))))
+Match$match_winner = ifelse(Match$match_winner=="Delhi Daredevils", 6, ifelse(Match$match_winner=="Chennai Super Kings", 3, ifelse(Match$match_winner=="Deccan Chargers", 8, ifelse(Match$match_winner=="Gujarat Lions", 13, ifelse(Match$match_winner=="Kings XI Punjab" | match_players$Player_team=="kings XI Punjab", 4,ifelse(Match$match_winner=="Kochi Tuskers Kerala",9,ifelse(Match$match_winner=="Kolkata Knight Riders", 1,ifelse(Match$match_winner=="Mumbai Indians",7,ifelse(Match$match_winner=="Pune Warriors",10,ifelse(Match$match_winner=="Rajasthan Royals",5,ifelse(Match$match_winner=="Rising Pune Supergiants",12,ifelse(Match$match_winner=="Royal Challengers Bangalore",2,ifelse(Match$match_winner=="Sunrisers Hyderabad" | match_players$Player_team=="sunrisers Hyderabad",11, 0)))))))))))))
 
 #TossWin
-Match$Toss_Winner = ifelse(Match$Toss_Winner=="Delhi Daredevils", 1, ifelse(Match$Toss_Winner=="Chennai Super Kings", 3, ifelse(Match$Toss_Winner=="Deccan Chargers", 8, ifelse(Match$Toss_Winner=="Gujarat Lions", 13, ifelse(Match$Toss_Winner=="Kings XI Punjab", 4,ifelse(Match$Toss_Winner=="Kochi Tuskers Kerala",9,ifelse(Match$Toss_Winner=="Kolkata Knight Riders", 1,ifelse(Match$Toss_Winner=="Mumbai Indians",7,ifelse(Match$Toss_Winner=="Pune Warriors",10,ifelse(Match$Toss_Winner=="Rajasthan Royals",5,ifelse(Match$Toss_Winner=="Rising Pune Supergiants",12,ifelse(Match$Toss_Winner=="Royal Challengers Bangalore",2,ifelse(Match$Toss_Winner=="Sunrisers Hyderabad ",11, 0)))))))))))))
+Match$Toss_Winner = ifelse(Match$Toss_Winner=="Delhi Daredevils", 6, ifelse(Match$Toss_Winner=="Chennai Super Kings", 3, ifelse(Match$Toss_Winner=="Deccan Chargers", 8, ifelse(Match$Toss_Winner=="Gujarat Lions", 13, ifelse(Match$Toss_Winner=="Kings XI Punjab" | match_players$Player_team=="kings XI Punjab", 4,ifelse(Match$Toss_Winner=="Kochi Tuskers Kerala",9,ifelse(Match$Toss_Winner=="Kolkata Knight Riders", 1,ifelse(Match$Toss_Winner=="Mumbai Indians",7,ifelse(Match$Toss_Winner=="Pune Warriors",10,ifelse(Match$Toss_Winner=="Rajasthan Royals",5,ifelse(Match$Toss_Winner=="Rising Pune Supergiants",12,ifelse(Match$Toss_Winner=="Royal Challengers Bangalore",2,ifelse(Match$Toss_Winner=="Sunrisers Hyderabad" | match_players$Player_team=="sunrisers Hyderabad",11, 0)))))))))))))
 
 #Opposit_captain
 Players$Captain_Id = Players$Player_Id
@@ -228,6 +228,7 @@ df1 = df1 %>% mutate(`Avg_Impact_Bowling` = (df1$`Impact Bowling`)/11)
 df2 = df2 %>% mutate(`Avg_Impact_Fielding` = (df2$`Impact Fielding`)/11)
 
 df = merge(df,Match,by="match_id")
+
 df = df[,c(-5,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
 
 df = df %>% mutate(`TossWin` = ifelse(df$Team_Id == df$Toss_Winner,1,0))
@@ -244,21 +245,39 @@ b <- a %>%
   group_by(MatcH_id, Over_id) %>%
   summarise(a = sum(Runs_Scored),b = distinct(Team_Batting))
 
-df = setNames(aggregate(a$Runs_Scored,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Runs Scored"))
-df1 = setNames(aggregate(a$Extra_runs,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Extras"))
+dfa = setNames(aggregate(a$Runs_Scored,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Runs Scored"))
+dfa1 = setNames(aggregate(a$Extra_runs,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Extras"))
 
-df = df %>%
-  left_join(df1, by=c("Match_Id", "Innings","Team","Over"))
+dfa = dfa %>%
+  left_join(dfa1, by=c("Match_Id", "Innings","Team","Over"))
 
-df$Overall <- df$`Runs Scored`+df$Extras
-df2 = setNames(aggregate(df$Overall,by=list(df$Match_Id,df$Innings,df$Team),sum),c("Match_Id", "Innings","Team","Score"))
+dfa$Overall <- dfa$`Runs Scored`+dfa$Extras
+dfa2 = setNames(aggregate(dfa$Overall,by=list(dfa$Match_Id,dfa$Innings,dfa$Team),sum),c("Match_Id", "Innings","Team","Score"))
 
-df3 = df %>%
+dfa3 = dfa %>%
   group_by(Match_Id,Innings)%>%
   mutate(x = cumsum(Overall))
 
-write.csv(df3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Over_by_Over.csv",row.names = FALSE)
+dfa3 = dfa3 %>%
+  mutate(RunRate = x/Over)
+
+dfa4 = setNames(aggregate(dfa3$x, by=list(dfa3$Match_Id,dfa3$Innings),function(x) max(x)+1),c("Match_Id","Innings","Target"))
+dfa5 = dfa4[!(dfa4$Innings=="2"),]
+dfa5$Innings = 2
+dfa3 = dfa3 %>%
+  left_join(dfa5, by=c("Match_Id", "Innings"))
+
+dfa3$Target[is.na(dfa3$Target)] <- 0
+
+
+dfa3 = dfa3 %>%
+  mutate(RunsNeeded = ifelse(Innings == 1,0,Target-x))
+
+dfa3 = dfa3 %>%
+  mutate(RunRateNeeded = ifelse(Innings == 1,0,RunsNeeded/(20-Over)))
+
+write.csv(dfa3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Over_by_Over.csv",row.names = FALSE)
 write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
 write.csv(match_players, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)
 
-rm(df,df1,df2,df3,a)
+#rm(df,dfa,dfa1,dfa2,dfa3,a)
