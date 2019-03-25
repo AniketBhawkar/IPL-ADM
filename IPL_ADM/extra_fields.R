@@ -230,7 +230,7 @@ df2 = df2 %>% mutate(`Avg_Impact_Fielding` = (df2$`Impact Fielding`)/11)
 
 df = merge(df,Match,by="match_id")
 
-df = df[,c(-5,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
+df = df[,c(-5,-6,-7,-8,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
 
 df = df %>% mutate(`TossWin` = ifelse(df$Team_Id == df$Toss_Winner,1,0))
 df = df %>% mutate(`Win` = ifelse(df$Team_Id == df$match_winner,1,0))
@@ -285,22 +285,22 @@ dfa3 = dfa3 %>%
 
 Impact_Batting = function(x){
   y = c(0,cumsum(x$Avg_Impact_Batting))
-  return(y)
+  return(round(y,digits = 2))
 }
 
 Impact_Bowling = function(x){
   y = c(0,cumsum(x$Avg_Impact_Bowling))
-  return(y)
+  return(round(y,digits = 2))
 }
 
 Impact_Fielding = function(x){
   y = c(0,cumsum(x$Avg_Impact_Fielding))
-  return(y)
+  return(round(y,digits = 2))
 }
 
-df$Avg_PreMatch_Impact_Batting = 5
-df$Avg_PreMatch_Impact_Bowling = 5
-df$Avg_PreMatch_Impact_Fielding = 5
+df$Avg_PreMatch_Impact_Batting = 6.5
+df$Avg_PreMatch_Impact_Bowling = 6.5
+df$Avg_PreMatch_Impact_Fielding = 6.5
 
 t1 = df[df$Team_Id==1,]
 t2 = df[df$Team_Id==2,]
@@ -411,81 +411,81 @@ rm(t)
 
 
 for (t in 1:nrow(t1)) {
-  t1[t,]$Avg_PreMatch_Impact_Batting = (t1[t,]$PreMatch_Impact_Batting)/(t-1)
-  t1[t,]$Avg_PreMatch_Impact_Bowling = (t1[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t1[t,]$Avg_PreMatch_Impact_Fielding = (t1[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t1[t,]$Avg_PreMatch_Impact_Batting = round(((t1[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t1[t,]$Avg_PreMatch_Impact_Bowling = round(((t1[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t1[t,]$Avg_PreMatch_Impact_Fielding = round(((t1[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t2)) {
-  t2[t,]$Avg_PreMatch_Impact_Batting = (t2[t,]$PreMatch_Impact_Batting)/(t-1)
-  t2[t,]$Avg_PreMatch_Impact_Bowling = (t2[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t2[t,]$Avg_PreMatch_Impact_Fielding = (t2[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t2[t,]$Avg_PreMatch_Impact_Batting = round(((t2[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t2[t,]$Avg_PreMatch_Impact_Bowling = round(((t2[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t2[t,]$Avg_PreMatch_Impact_Fielding = round(((t2[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t3)) {
-  t3[t,]$Avg_PreMatch_Impact_Batting = (t3[t,]$PreMatch_Impact_Batting)/(t-1)
-  t3[t,]$Avg_PreMatch_Impact_Bowling = (t3[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t3[t,]$Avg_PreMatch_Impact_Fielding = (t3[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t3[t,]$Avg_PreMatch_Impact_Batting = round(((t3[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t3[t,]$Avg_PreMatch_Impact_Bowling = round(((t3[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t3[t,]$Avg_PreMatch_Impact_Fielding = round(((t3[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t4)) {
-  t4[t,]$Avg_PreMatch_Impact_Batting = (t4[t,]$PreMatch_Impact_Batting)/(t-1)
-  t4[t,]$Avg_PreMatch_Impact_Bowling = (t4[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t4[t,]$Avg_PreMatch_Impact_Fielding = (t4[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t4[t,]$Avg_PreMatch_Impact_Batting = round(((t4[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t4[t,]$Avg_PreMatch_Impact_Bowling = round(((t4[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t4[t,]$Avg_PreMatch_Impact_Fielding = round(((t4[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t5)) {
-  t5[t,]$Avg_PreMatch_Impact_Batting = (t5[t,]$PreMatch_Impact_Batting)/(t-1)
-  t5[t,]$Avg_PreMatch_Impact_Bowling = (t5[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t5[t,]$Avg_PreMatch_Impact_Fielding = (t5[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t5[t,]$Avg_PreMatch_Impact_Batting = round(((t5[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t5[t,]$Avg_PreMatch_Impact_Bowling = round(((t5[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t5[t,]$Avg_PreMatch_Impact_Fielding = round(((t5[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t6)) {
-  t6[t,]$Avg_PreMatch_Impact_Batting = (t6[t,]$PreMatch_Impact_Batting)/(t-1)
-  t6[t,]$Avg_PreMatch_Impact_Bowling = (t6[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t6[t,]$Avg_PreMatch_Impact_Fielding = (t6[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t6[t,]$Avg_PreMatch_Impact_Batting = round(((t6[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t6[t,]$Avg_PreMatch_Impact_Bowling = round(((t6[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t6[t,]$Avg_PreMatch_Impact_Fielding = round(((t6[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t7)) {
-  t7[t,]$Avg_PreMatch_Impact_Batting = (t7[t,]$PreMatch_Impact_Batting)/(t-1)
-  t7[t,]$Avg_PreMatch_Impact_Bowling = (t7[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t7[t,]$Avg_PreMatch_Impact_Fielding = (t7[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t7[t,]$Avg_PreMatch_Impact_Batting = round(((t7[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t7[t,]$Avg_PreMatch_Impact_Bowling = round(((t7[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t7[t,]$Avg_PreMatch_Impact_Fielding = round(((t7[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t8)) {
-  t8[t,]$Avg_PreMatch_Impact_Batting = (t8[t,]$PreMatch_Impact_Batting)/(t-1)
-  t8[t,]$Avg_PreMatch_Impact_Bowling = (t8[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t8[t,]$Avg_PreMatch_Impact_Fielding = (t8[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t8[t,]$Avg_PreMatch_Impact_Batting = round(((t8[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t8[t,]$Avg_PreMatch_Impact_Bowling = round(((t8[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t8[t,]$Avg_PreMatch_Impact_Fielding = round(((t8[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t9)) {
-  t9[t,]$Avg_PreMatch_Impact_Batting = (t9[t,]$PreMatch_Impact_Batting)/(t-1)
-  t9[t,]$Avg_PreMatch_Impact_Bowling = (t9[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t9[t,]$Avg_PreMatch_Impact_Fielding = (t9[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t9[t,]$Avg_PreMatch_Impact_Batting = round(((t9[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t9[t,]$Avg_PreMatch_Impact_Bowling = round(((t9[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t9[t,]$Avg_PreMatch_Impact_Fielding = round(((t9[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t10)) {
-  t10[t,]$Avg_PreMatch_Impact_Batting = (t10[t,]$PreMatch_Impact_Batting)/(t-1)
-  t10[t,]$Avg_PreMatch_Impact_Bowling = (t10[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t10[t,]$Avg_PreMatch_Impact_Fielding = (t10[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t10[t,]$Avg_PreMatch_Impact_Batting = round(((t10[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t10[t,]$Avg_PreMatch_Impact_Bowling = round(((t10[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t10[t,]$Avg_PreMatch_Impact_Fielding = round(((t10[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t11)) {
-  t11[t,]$Avg_PreMatch_Impact_Batting = (t11[t,]$PreMatch_Impact_Batting)/(t-1)
-  t11[t,]$Avg_PreMatch_Impact_Bowling = (t11[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t11[t,]$Avg_PreMatch_Impact_Fielding = (t11[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t11[t,]$Avg_PreMatch_Impact_Batting = round(((t11[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t11[t,]$Avg_PreMatch_Impact_Bowling = round(((t11[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t11[t,]$Avg_PreMatch_Impact_Fielding = round(((t11[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t12)) {
-  t12[t,]$Avg_PreMatch_Impact_Batting = (t12[t,]$PreMatch_Impact_Batting)/(t-1)
-  t12[t,]$Avg_PreMatch_Impact_Bowling = (t12[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t12[t,]$Avg_PreMatch_Impact_Fielding = (t12[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t12[t,]$Avg_PreMatch_Impact_Batting = round(((t12[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t12[t,]$Avg_PreMatch_Impact_Bowling = round(((t12[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t12[t,]$Avg_PreMatch_Impact_Fielding = round(((t12[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 for (t in 1:nrow(t13)) {
-  t13[t,]$Avg_PreMatch_Impact_Batting = (t13[t,]$PreMatch_Impact_Batting)/(t-1)
-  t13[t,]$Avg_PreMatch_Impact_Bowling = (t13[t,]$PreMatch_Impact_Bowling)/(t-1)
-  t13[t,]$Avg_PreMatch_Impact_Fielding = (t13[t,]$PreMatch_Impact_Fielding)/(t-1)
+  t13[t,]$Avg_PreMatch_Impact_Batting = round(((t13[t,]$PreMatch_Impact_Batting)/(t-1)), digits = 2)
+  t13[t,]$Avg_PreMatch_Impact_Bowling = round(((t13[t,]$PreMatch_Impact_Bowling)/(t-1)), digits = 2)
+  t13[t,]$Avg_PreMatch_Impact_Fielding = round(((t13[t,]$PreMatch_Impact_Fielding)/(t-1)), digits = 2)
 }
 
 
@@ -505,21 +505,21 @@ t11 <- replace(t11, is.na(t11), 6.5)
 t12 <- replace(t12, is.na(t12), 6.5)
 t13 <- replace(t13, is.na(t13), 6.5)
 
-t1 = t1[c(-3:-12)]
-t2 = t2[c(-3:-12)]
-t3 = t3[c(-3:-12)]
-t4 = t4[c(-3:-12)]
-t5 = t5[c(-3:-12)]
-t6 = t6[c(-3:-12)]
-t7 = t7[c(-3:-12)]
-t8 = t8[c(-3:-12)]
-t9 = t9[c(-3:-12)]
-t10 = t10[c(-3:-12)]
-t11 = t11[c(-3:-12)]
-t12 = t12[c(-3:-12)]
-t13 = t13[c(-3:-12)]
+t1 = t1[c(-3:-13)]
+t2 = t2[c(-3:-13)]
+t3 = t3[c(-3:-13)]
+t4 = t4[c(-3:-13)]
+t5 = t5[c(-3:-13)]
+t6 = t6[c(-3:-13)]
+t7 = t7[c(-3:-13)]
+t8 = t8[c(-3:-13)]
+t9 = t9[c(-3:-13)]
+t10 = t10[c(-3:-13)]
+t11 = t11[c(-3:-13)]
+t12 = t12[c(-3:-13)]
+t13 = t13[c(-3:-13)]
 
-df = df[c(-13:-15)]
+df = df[c(-14:-16)]
 
 result<-rbind(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13)
 df = df %>%
@@ -529,4 +529,4 @@ write.csv(dfa3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-dat
 write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
 write.csv(match_players, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)
 
-#rm(df,dfa,dfa1,dfa2,dfa3,a)
+rm(df,dfa,dfa1,dfa2,dfa3,a,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,df1,df2,dfa4,dfa5,result)

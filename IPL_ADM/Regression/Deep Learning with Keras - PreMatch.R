@@ -1,7 +1,7 @@
 library(keras)
 library(readr)
 df = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv")
-df = df[c(-3,-4,-9,-10,-11,-12)]
+df = df[c(-3,-4,-5,-10,-11,-12,-13)]
 data = as.matrix(df)
 
 dimnames(data) = NULL
@@ -55,7 +55,7 @@ model %>% compile(
 history <- model %>% 
   fit(x_train, 
       y_train, 
-      epochs = 20, 
+      epochs = 10, 
       batch_size = 128, 
       validation_split = 0.2)
 
