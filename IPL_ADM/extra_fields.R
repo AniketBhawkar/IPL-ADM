@@ -1,4 +1,5 @@
 library(dplyr)
+library(tidyverse)
 # Load Ball by Ball
 ball_by_ball = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Ball_By_Ball_New.csv")
 match_players = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Player_match.csv")
@@ -178,7 +179,7 @@ impact_factor <- function(match_players){
   match_players = match_players %>% mutate(`im13` = ifelse(match_players$Catches==0,6,ifelse(match_players$Catches==1,8,ifelse(match_players$Catches==2,9,10))))  
   match_players = match_players %>% mutate(`im17` = ifelse(match_players$`Run Out`==0,6,ifelse(match_players$`Run Out`==1,8,ifelse(match_players$`Run Out`==2,9,10))))  
   match_players = match_players %>% mutate(`impact_fielding` = (match_players$im13+match_players$im17)/2)    
-
+  
   # Remove Extra Catches Columns
   match_players = match_players[ , -which(names(match_players) %in% c("im1","im2","im3","im4","im5","im16","im11","im12","im17","im13"))]
   return(match_players) 
@@ -275,6 +276,254 @@ dfa3 = dfa3 %>%
 
 dfa3 = dfa3 %>%
   mutate(RunRateNeeded = ifelse(Innings == 1,0,RunsNeeded/(20-Over)))
+
+
+
+
+################# Impact Team before match ####################
+
+
+Impact_Batting = function(x){
+  y = c(0,cumsum(x$Avg_Impact_Batting))
+  return(y)
+}
+
+Impact_Bowling = function(x){
+  y = c(0,cumsum(x$Avg_Impact_Bowling))
+  return(y)
+}
+
+Impact_Fielding = function(x){
+  y = c(0,cumsum(x$Avg_Impact_Fielding))
+  return(y)
+}
+
+df$Avg_PreMatch_Impact_Batting = 5
+df$Avg_PreMatch_Impact_Bowling = 5
+df$Avg_PreMatch_Impact_Fielding = 5
+
+t1 = df[df$Team_Id==1,]
+t2 = df[df$Team_Id==2,]
+t3 = df[df$Team_Id==3,]
+t4 = df[df$Team_Id==4,]
+t5 = df[df$Team_Id==5,]
+t6 = df[df$Team_Id==6,]
+t7 = df[df$Team_Id==7,]
+t8 = df[df$Team_Id==8,]
+t9 = df[df$Team_Id==9,]
+t10 = df[df$Team_Id==10,]
+t11 = df[df$Team_Id==11,]
+t12 = df[df$Team_Id==12,]
+t13 = df[df$Team_Id==13,]
+
+t =  as.data.frame(Impact_Batting(t1))
+t1$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t1))
+t1$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t1))
+t1$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t2))
+t2$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t2))
+t2$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t2))
+t2$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t3))
+t3$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t3))
+t3$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t3))
+t3$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t4))
+t4$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t4))
+t4$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t4))
+t4$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t5))
+t5$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t5))
+t5$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t5))
+t5$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t6))
+t6$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t6))
+t6$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t6))
+t6$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t7))
+t7$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t7))
+t7$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t7))
+t7$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t8))
+t8$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t8))
+t8$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t8))
+t8$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t9))
+t9$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t9))
+t9$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t9))
+t9$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t10))
+t10$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t10))
+t10$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t10))
+t10$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t11))
+t11$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t11))
+t11$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t11))
+t11$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t12))
+t12$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t12))
+t12$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t12))
+t12$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+
+t =  as.data.frame(Impact_Batting(t13))
+t13$PreMatch_Impact_Batting =  t[-nrow(t),]
+t =  as.data.frame(Impact_Bowling(t13))
+t13$PreMatch_Impact_Bowling =  t[-nrow(t),]
+t =  as.data.frame(Impact_Fielding(t13))
+t13$PreMatch_Impact_Fielding =  t[-nrow(t),]  
+rm(t)
+
+
+
+for (t in 1:nrow(t1)) {
+  t1[t,]$Avg_PreMatch_Impact_Batting = (t1[t,]$PreMatch_Impact_Batting)/(t-1)
+  t1[t,]$Avg_PreMatch_Impact_Bowling = (t1[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t1[t,]$Avg_PreMatch_Impact_Fielding = (t1[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t2)) {
+  t2[t,]$Avg_PreMatch_Impact_Batting = (t2[t,]$PreMatch_Impact_Batting)/(t-1)
+  t2[t,]$Avg_PreMatch_Impact_Bowling = (t2[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t2[t,]$Avg_PreMatch_Impact_Fielding = (t2[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t3)) {
+  t3[t,]$Avg_PreMatch_Impact_Batting = (t3[t,]$PreMatch_Impact_Batting)/(t-1)
+  t3[t,]$Avg_PreMatch_Impact_Bowling = (t3[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t3[t,]$Avg_PreMatch_Impact_Fielding = (t3[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t4)) {
+  t4[t,]$Avg_PreMatch_Impact_Batting = (t4[t,]$PreMatch_Impact_Batting)/(t-1)
+  t4[t,]$Avg_PreMatch_Impact_Bowling = (t4[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t4[t,]$Avg_PreMatch_Impact_Fielding = (t4[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t5)) {
+  t5[t,]$Avg_PreMatch_Impact_Batting = (t5[t,]$PreMatch_Impact_Batting)/(t-1)
+  t5[t,]$Avg_PreMatch_Impact_Bowling = (t5[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t5[t,]$Avg_PreMatch_Impact_Fielding = (t5[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t6)) {
+  t6[t,]$Avg_PreMatch_Impact_Batting = (t6[t,]$PreMatch_Impact_Batting)/(t-1)
+  t6[t,]$Avg_PreMatch_Impact_Bowling = (t6[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t6[t,]$Avg_PreMatch_Impact_Fielding = (t6[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t7)) {
+  t7[t,]$Avg_PreMatch_Impact_Batting = (t7[t,]$PreMatch_Impact_Batting)/(t-1)
+  t7[t,]$Avg_PreMatch_Impact_Bowling = (t7[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t7[t,]$Avg_PreMatch_Impact_Fielding = (t7[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t8)) {
+  t8[t,]$Avg_PreMatch_Impact_Batting = (t8[t,]$PreMatch_Impact_Batting)/(t-1)
+  t8[t,]$Avg_PreMatch_Impact_Bowling = (t8[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t8[t,]$Avg_PreMatch_Impact_Fielding = (t8[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t9)) {
+  t9[t,]$Avg_PreMatch_Impact_Batting = (t9[t,]$PreMatch_Impact_Batting)/(t-1)
+  t9[t,]$Avg_PreMatch_Impact_Bowling = (t9[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t9[t,]$Avg_PreMatch_Impact_Fielding = (t9[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t10)) {
+  t10[t,]$Avg_PreMatch_Impact_Batting = (t10[t,]$PreMatch_Impact_Batting)/(t-1)
+  t10[t,]$Avg_PreMatch_Impact_Bowling = (t10[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t10[t,]$Avg_PreMatch_Impact_Fielding = (t10[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t11)) {
+  t11[t,]$Avg_PreMatch_Impact_Batting = (t11[t,]$PreMatch_Impact_Batting)/(t-1)
+  t11[t,]$Avg_PreMatch_Impact_Bowling = (t11[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t11[t,]$Avg_PreMatch_Impact_Fielding = (t11[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t12)) {
+  t12[t,]$Avg_PreMatch_Impact_Batting = (t12[t,]$PreMatch_Impact_Batting)/(t-1)
+  t12[t,]$Avg_PreMatch_Impact_Bowling = (t12[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t12[t,]$Avg_PreMatch_Impact_Fielding = (t12[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+for (t in 1:nrow(t13)) {
+  t13[t,]$Avg_PreMatch_Impact_Batting = (t13[t,]$PreMatch_Impact_Batting)/(t-1)
+  t13[t,]$Avg_PreMatch_Impact_Bowling = (t13[t,]$PreMatch_Impact_Bowling)/(t-1)
+  t13[t,]$Avg_PreMatch_Impact_Fielding = (t13[t,]$PreMatch_Impact_Fielding)/(t-1)
+}
+
+
+
+
+t1 <- replace(t1, is.na(t1), 6.5)
+t2 <- replace(t2, is.na(t2), 6.5)
+t3 <- replace(t3, is.na(t3), 6.5)
+t4 <- replace(t4, is.na(t4), 6.5)
+t5 <- replace(t5, is.na(t5), 6.5)
+t6 <- replace(t6, is.na(t6), 6.5)
+t7 <- replace(t7, is.na(t7), 6.5)
+t8 <- replace(t8, is.na(t8), 6.5)
+t9 <- replace(t9, is.na(t9), 6.5)
+t10 <- replace(t10, is.na(t10), 6.5)
+t11 <- replace(t11, is.na(t11), 6.5)
+t12 <- replace(t12, is.na(t12), 6.5)
+t13 <- replace(t13, is.na(t13), 6.5)
+
+t1 = t1[c(-3:-12)]
+t2 = t2[c(-3:-12)]
+t3 = t3[c(-3:-12)]
+t4 = t4[c(-3:-12)]
+t5 = t5[c(-3:-12)]
+t6 = t6[c(-3:-12)]
+t7 = t7[c(-3:-12)]
+t8 = t8[c(-3:-12)]
+t9 = t9[c(-3:-12)]
+t10 = t10[c(-3:-12)]
+t11 = t11[c(-3:-12)]
+t12 = t12[c(-3:-12)]
+t13 = t13[c(-3:-12)]
+
+df = df[c(-13:-15)]
+
+result<-rbind(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13)
+df = df %>%
+  left_join(result, by=c("match_id", "Team_Id"))
 
 write.csv(dfa3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Over_by_Over.csv",row.names = FALSE)
 write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
