@@ -525,6 +525,15 @@ result<-rbind(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13)
 df = df %>%
   left_join(result, by=c("match_id", "Team_Id"))
 
+df$Avg_Impact_Batting = round(df$Avg_Impact_Batting,digits = 2)
+df$Avg_Impact_Bowling = round(df$Avg_Impact_Bowling,digits = 2)
+df$Avg_Impact_Fielding = round(df$Avg_Impact_Fielding,digits = 2)
+
+df$`Impact Batting` = round(df$`Impact Batting`,digits = 2)
+df$`Impact Bowling`= round(df$`Impact Bowling`,digits = 2)
+df$`Impact Fielding` = round(df$`Impact Fielding`,digits = 2)
+
+
 write.csv(dfa3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Over_by_Over.csv",row.names = FALSE)
 write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
 write.csv(match_players, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)
