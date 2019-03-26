@@ -8,7 +8,6 @@ Match <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-d
 Teams <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Team.csv")
 Teams = Teams[,c(-1)]
 
-
 # Runs scored by player
 #Batting score
 df = setNames(aggregate(ball_by_ball$Runs_Scored,by=list(ball_by_ball$Striker,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Runs Scored"))
@@ -230,7 +229,13 @@ df2 = df2 %>% mutate(`Avg_Impact_Fielding` = (df2$`Impact Fielding`)/11)
 
 df = merge(df,Match,by="match_id")
 
-df = df[,c(-5,-6,-7,-8,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
+df = df[,c(-5,-8,-10,-11,-12,-15,-16,-17,-18,-19,-20)]
+
+#Team 1
+df$Team1 = ifelse(df$Team1=="Delhi Daredevils", 6, ifelse(df$Team1=="Chennai Super Kings", 3, ifelse(df$Team1=="Deccan Chargers", 8, ifelse(df$Team1=="Gujarat Lions", 13, ifelse(df$Team1=="Kings XI Punjab" | match_players$Player_team=="kings XI Punjab", 4,ifelse(df$Team1=="Kochi Tuskers Kerala",9,ifelse(df$Team1=="Kolkata Knight Riders", 1,ifelse(df$Team1=="Mumbai Indians",7,ifelse(df$Team1=="Pune Warriors",10,ifelse(df$Team1=="Rajasthan Royals",5,ifelse(df$Team1=="Rising Pune Supergiants",12,ifelse(df$Team1=="Royal Challengers Bangalore",2,ifelse(df$Team1=="Sunrisers Hyderabad" | match_players$Player_team=="sunrisers Hyderabad",11, 0)))))))))))))
+
+#Team 2
+df$Team2 = ifelse(df$Team2=="Delhi Daredevils", 6, ifelse(df$Team2=="Chennai Super Kings", 3, ifelse(df$Team2=="Deccan Chargers", 8, ifelse(df$Team2=="Gujarat Lions", 13, ifelse(df$Team2=="Kings XI Punjab" | match_players$Player_team=="kings XI Punjab", 4,ifelse(df$Team2=="Kochi Tuskers Kerala",9,ifelse(df$Team2=="Kolkata Knight Riders", 1,ifelse(df$Team2=="Mumbai Indians",7,ifelse(df$Team2=="Pune Warriors",10,ifelse(df$Team2=="Rajasthan Royals",5,ifelse(df$Team2=="Rising Pune Supergiants",12,ifelse(df$Team2=="Royal Challengers Bangalore",2,ifelse(df$Team2=="Sunrisers Hyderabad" | match_players$Player_team=="sunrisers Hyderabad",11, 0)))))))))))))
 
 df = df %>% mutate(`TossWin` = ifelse(df$Team_Id == df$Toss_Winner,1,0))
 df = df %>% mutate(`Win` = ifelse(df$Team_Id == df$match_winner,1,0))
@@ -278,7 +283,7 @@ dfa3 = dfa3 %>%
   mutate(RunRateNeeded = ifelse(Innings == 1,0,RunsNeeded/(20-Over)))
 
 
-
+# df = df[c(-1:-797),]
 
 ################# Impact Team before match ####################
 
@@ -489,8 +494,6 @@ for (t in 1:nrow(t13)) {
 }
 
 
-
-
 t1 <- replace(t1, is.na(t1), 6.5)
 t2 <- replace(t2, is.na(t2), 6.5)
 t3 <- replace(t3, is.na(t3), 6.5)
@@ -534,8 +537,36 @@ df$`Impact Bowling`= round(df$`Impact Bowling`,digits = 2)
 df$`Impact Fielding` = round(df$`Impact Fielding`,digits = 2)
 
 
+x5_over = dfa3[dfa3[,4]==5,]
+x10_over = dfa3[dfa3[,4]==10,]
+x15_over = dfa3[dfa3[,4]==15,]
+
+x5_over_2innings = x5_over[x5_over[,2]==2,]
+x10_over_2innings = x10_over[x10_over[,2]==2,]
+x15_over_2innings = x15_over[x15_over[,2]==2,]
+
+
+winner = df
+winner = winner[c(-3,-4,-7,-12:-23)]
+
+colnames(winner)= c("Match_Id","Team","Team1","Team2","Toss_Winner","match_winner","TossWin","Win")
+
+x5_over_2innings = x5_over_2innings %>%
+  left_join(winner, by=c("Match_Id", "Team"))
+
+x10_over_2innings = x10_over_2innings %>%
+  left_join(winner, by=c("Match_Id", "Team"))
+
+x15_over_2innings = x15_over_2innings %>%
+  left_join(winner, by=c("Match_Id", "Team"))
+
+
 write.csv(dfa3, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Over_by_Over.csv",row.names = FALSE)
 write.csv(df, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv",row.names = FALSE)
 write.csv(match_players, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Player_match.csv",row.names = FALSE)
 
-rm(df,dfa,dfa1,dfa2,dfa3,a,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,df1,df2,dfa4,dfa5,result)
+write.csv(x5_over_2innings, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/x5_over_2innings.csv",row.names = FALSE)
+write.csv(x10_over_2innings, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/x10_over_2innings.csv",row.names = FALSE)
+write.csv(x15_over_2innings, "F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/x15_over_2innings.csv",row.names = FALSE)
+
+rm(df,dfa,dfa1,dfa2,dfa3,a,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,df1,df2,dfa4,dfa5,result,winner,x5_over_2innings,x10_over_2innings,x15_over_2innings,x5_over,x10_over,x15_over)

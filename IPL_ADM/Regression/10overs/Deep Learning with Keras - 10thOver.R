@@ -1,7 +1,7 @@
 library(keras)
 library(readr)
 df = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv")
-df = df[c(-5,-6,-8,-14:-19)]
+df = df[c(-3,-4,-5,-6,-8,-10,-11,-12,-13)]
 data = as.matrix(df)
 
 dimnames(data) = NULL
@@ -10,14 +10,14 @@ index = sample(2,
                nrow(data),
                replace = TRUE,
                prob = c(0.75,0.25))
-x_train = data[index == 1,-6]
-x_test = data[index == 2,-6]
+x_train = data[index == 1,-4]
+x_test = data[index == 2,-4]
 
 #x_test_actual = data[index == 1,8]
-y_test_actual = data[index == 2,6]
+y_test_actual = data[index == 2,4]
 
-y_train = to_categorical(data[index==1,6])
-y_test = to_categorical(data[index==2,6])
+y_train = to_categorical(data[index==1,4])
+y_test = to_categorical(data[index==2,4])
 
 
 mean_train = apply(x_train,
@@ -25,8 +25,8 @@ mean_train = apply(x_train,
                    mean)
 
 std_train = apply(x_train,
-                   2,
-                   sd)
+                  2,
+                  sd)
 
 x_train = scale(x_train,
                 center = mean_train,
@@ -55,7 +55,7 @@ model %>% compile(
 history <- model %>% 
   fit(x_train, 
       y_train, 
-      epochs = 20, 
+      epochs = 10, 
       batch_size = 128, 
       validation_split = 0.2)
 
