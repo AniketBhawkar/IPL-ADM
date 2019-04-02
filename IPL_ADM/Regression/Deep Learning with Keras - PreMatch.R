@@ -1,7 +1,7 @@
 library(keras)
 library(readr)
 df = read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/clean datasets/Match_Impact_Teams.csv")
-df = df[c(-3,-4,-5,-6,-8,-10,-11,-12,-13)]
+df = df[c(-3,-4,-5,-6,-8,-9,-10,-12,-13)]
 data = as.matrix(df)
 
 dimnames(data) = NULL
@@ -39,7 +39,7 @@ x_test = scale(x_test,
 
 model <- keras_model_sequential() 
 model %>% 
-  layer_dense(units = 256, activation = "relu", input_shape = c(9)) %>% 
+  layer_dense(units = 256, activation = "relu", input_shape = c(13)) %>% 
   layer_dropout(rate = 0.4) %>% 
   layer_dense(units = 128, activation = "relu") %>%
   layer_dropout(rate = 0.3) %>%
