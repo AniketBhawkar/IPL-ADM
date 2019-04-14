@@ -8,6 +8,9 @@ Match <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-d
 Teams <- read.csv("F:/Masters/Semester 2/Advanced Data Mining/IPL/raghu543-ipl-data-till-2017/Team.csv")
 Teams = Teams[,c(-1)]
 
+ball_by_ball = ball_by_ball[!(ball_by_ball$MatcH_id=="419119" | ball_by_ball$MatcH_id=="392195" | ball_by_ball$MatcH_id=="392202" | ball_by_ball$MatcH_id=="392207" | ball_by_ball$MatcH_id=="419126" | ball_by_ball$MatcH_id=="598009" | ball_by_ball$MatcH_id=="598022" | ball_by_ball$MatcH_id=="729320" | ball_by_ball$MatcH_id=="829746" | ball_by_ball$MatcH_id=="1082625"),]
+
+
 # Runs scored by player
 #Batting score
 df = setNames(aggregate(ball_by_ball$Runs_Scored,by=list(ball_by_ball$Striker,ball_by_ball$MatcH_id),sum),c("Player_Id","Match_Id","Runs Scored"))
@@ -245,6 +248,8 @@ df = df %>%
   left_join(df1, by=c("Team_Id","match_id")) %>% 
   left_join(df2, by=c("Team_Id","match_id"))
 
+
+
 # over by over score
 a = ball_by_ball
 b <- a %>%
@@ -254,11 +259,14 @@ b <- a %>%
 dfa = setNames(aggregate(a$Runs_Scored,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Runs Scored"))
 dfa1 = setNames(aggregate(a$Extra_runs,by=list(a$MatcH_id,a$Innings_No,a$Team_Batting,a$Over_id),sum),c("Match_Id", "Innings","Team","Over","Extras"))
 
+
+
 dfa = dfa %>%
   left_join(dfa1, by=c("Match_Id", "Innings","Team","Over"))
 
 dfa$Overall <- dfa$`Runs Scored`+dfa$Extras
 dfa2 = setNames(aggregate(dfa$Overall,by=list(dfa$Match_Id,dfa$Innings,dfa$Team),sum),c("Match_Id", "Innings","Team","Score"))
+
 
 dfa3 = dfa %>%
   group_by(Match_Id,Innings)%>%
