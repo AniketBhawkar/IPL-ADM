@@ -12,7 +12,7 @@ testing  <- data[-index, ]
 
 # Logistic Regression
 # Training
-logistic <-glm(Win ~ Team1+Team2+TossWin+x+RunsNeeded+RunRateNeeded,data=training,family="binomial")
+logistic <-glm(Win ~ TossWin+x+RunsNeeded+RunRateNeeded,data=training,family="binomial")
 summary(logistic)
 res <- predict(logistic,newdata=training,type='response')
 confusion = table(Actual_Value = training$Win,Predicted_Value = res>0.5)
