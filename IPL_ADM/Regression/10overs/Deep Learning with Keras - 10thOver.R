@@ -5,7 +5,7 @@ df = df[c(-1,-2,-3,-4,-5,-6,-15,-16)]
 data = as.matrix(df)
 
 dimnames(data) = NULL
-set.seed(1234)
+set.seed(3696)
 index = sample(2,
                nrow(data),
                replace = TRUE,
@@ -55,7 +55,7 @@ model %>% compile(
 history <- model %>% 
   fit(x_train, 
       y_train, 
-      epochs = 10, 
+      epochs = 20, 
       batch_size = 128, 
       validation_split = 0.2)
 

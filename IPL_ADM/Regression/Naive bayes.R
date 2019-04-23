@@ -17,7 +17,7 @@ win$match_winner <- as.factor(win$match_winner)
 # Visualization
 pairs.panels(win[-8])
 win %>%
-  ggplot(aes(x=Win, y=Avg_Impact_Fielding, fill = Win))+
+  ggplot(aes(x=Win, y=Avg_Impact_Fielding.x, fill = Win))+
   geom_boxplot() +
   ggtitle("Box Plot")
 win %>%
@@ -29,7 +29,7 @@ win %>%
   geom_boxplot() +
   ggtitle("Box Plot")
 
-win %>% ggplot(aes(x=Avg_Impact_Fielding, fill = Win))+
+win %>% ggplot(aes(x=Avg_Impact_Fielding.x, fill = Win))+
   geom_density(alpha=0.8, color='black') +
   ggtitle("Density Plot")
 win %>% ggplot(aes(x=Avg_Impact_Batting, fill = Win))+
